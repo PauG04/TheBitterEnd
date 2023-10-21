@@ -18,18 +18,20 @@ public class ShakerManager : MonoBehaviour
         Mixed
     }
 
+    private void Awake()
+    {
+        ouncesInShaker = new List<BottleManager.typeOfDrink>();
+    }
+
     public void AddOunce(BottleManager.typeOfDrink ounceToAdd)
     {
         if (!isFull)
         {
             ouncesInShaker.Add(ounceToAdd);
-            Debug.Log("ME CAGOOO");
-
             currentOunces++;
             if (currentOunces >= maxOunces)
             {
                 isFull = true;
-                Debug.Log("ESTA LLENO");
             }
         }
     }
