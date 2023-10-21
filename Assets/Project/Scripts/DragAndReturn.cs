@@ -14,7 +14,12 @@ public class DragAndReturn : MonoBehaviour
     [SerializeField]
     private Transform currentWindowPosition;
 
-private void Update()
+    private void Awake()
+    {
+        transform.position = currentWindowPosition.position + initialOffset;
+    }
+
+    private void Update()
     {
         if (dragging)
         {
@@ -35,7 +40,7 @@ private void Update()
 
     private void OnMouseUp()
     {
-        transform.position = initialOffset + currentWindowPosition.position;
+        transform.position = currentWindowPosition.position + initialOffset;
         dragging = false;
     }
 }
