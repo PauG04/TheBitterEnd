@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BottleManager : MonoBehaviour
 {
+    [SerializeField]
     private int maxOunces;
     private int currentOunces;
 
@@ -26,6 +27,11 @@ public class BottleManager : MonoBehaviour
 
     [SerializeField]
     private typeOfDrink type;
+
+    private void Awake()
+    {
+        currentOunces = maxOunces;
+    }
 
     public void RefillOunces()
     {

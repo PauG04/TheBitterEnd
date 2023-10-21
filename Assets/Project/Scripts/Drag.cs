@@ -8,6 +8,14 @@ public class Drag : MonoBehaviour
     
     private Vector3 offset;
 
+    [SerializeField]
+    Rigidbody2D rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     private void Update()
     {
         if (dragging)
@@ -18,7 +26,7 @@ public class Drag : MonoBehaviour
 
     private void CalculatePosition()
     {
-        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
+        rb.MovePosition(Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset);
     }
 
     private void OnMouseDown()
