@@ -6,7 +6,8 @@ public class Chat : MonoBehaviour
 {
     private bool isWorking = true; //esta variable se activa y se desactiva cuando se abre la app de trabajo
     private bool canTakeOrder = false;
-    private bool isDrinkPrepares = true; //esta variabl se activa al entregar la bebida 
+    [SerializeField]
+    private DrinkTaken DrinkTaken;
     private float currentTime = 0.0f;
     [SerializeField]
     private float maxTime;
@@ -25,7 +26,7 @@ public class Chat : MonoBehaviour
         {
             TakeOrder();
         }
-        else if (isWorking && isDrinkPrepares)
+        else if (isWorking && DrinkTaken.GetIsDrinkPrepares())
         {
             Timer();
         }
@@ -33,7 +34,7 @@ public class Chat : MonoBehaviour
 
     private void TakeOrder()
     {
-        isDrinkPrepares = false;
+        DrinkTaken.SetIsDrinkPrepares(false);
         canTakeOrder = false;
         Debug.Log("I want a Beer");
     }
