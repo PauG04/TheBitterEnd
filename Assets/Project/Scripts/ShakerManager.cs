@@ -11,6 +11,8 @@ public class ShakerManager : MonoBehaviour
         Mixed
     }
 
+    private ShakerState states = ShakerState.Idle;
+
     private List<BottleManager.typeOfDrink> ouncesInShaker;
 
     public void AddOunce(BottleManager.typeOfDrink ounceToAdd)
@@ -23,5 +25,9 @@ public class ShakerManager : MonoBehaviour
         return ouncesInShaker;
     }
 
+    public void SetShakerState(ShakerState state)
+    {
+        states = state;
+    }
 
 }
