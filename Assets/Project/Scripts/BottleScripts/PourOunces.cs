@@ -7,6 +7,9 @@ public class PourOunces : MonoBehaviour
     private BottleManager bottle;
 
     [SerializeField]
+    private OuncesCounter ouncesCounter;
+
+    [SerializeField]
     private ShakerManager shaker;
 
     private BoxCollider2D boxCollider;
@@ -26,7 +29,7 @@ public class PourOunces : MonoBehaviour
         {
             shaker.AddOunce(bottle.GetTypeOfDrink());
             bottle.SubtractOneOunce();
-            //sumar +1 al contador
+            ouncesCounter.AddOneToCounter();
         }
     }
 }
