@@ -5,11 +5,16 @@ using UnityEngine;
 public class DrinkTaken : MonoBehaviour
 {
     private bool isDrinkPrepares = true;
+    [SerializeField]
+    private DrinkScript drinkScript;
+    [SerializeField]
+    private GameObject cup;
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Shaker")
+        if (collision.tag == "Drink" && drinkScript.GetIsMouseNotPressed())
         {
+            cup.SetActive(false);
             isDrinkPrepares = true;
             Debug.Log("SI");
         }
@@ -24,4 +29,5 @@ public class DrinkTaken : MonoBehaviour
     {
         return isDrinkPrepares;
     }
+
 }
