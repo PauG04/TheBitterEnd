@@ -8,7 +8,7 @@ public class Drag : MonoBehaviour
     private bool dragging = false;
     
     private Vector3 offset;
-
+    
     [SerializeField]
     Rigidbody2D rb;
 
@@ -24,12 +24,12 @@ public class Drag : MonoBehaviour
             CalculatePosition();
         }
     }
-
+    
     private void CalculatePosition()
     {
         rb.MovePosition(Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset);
     }
-
+    
     private void OnMouseDown()
     {
         offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
