@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class Drag : MonoBehaviour
 {
-    [SerializeField] private GameObject dragObject;
 
     private bool dragging = false;
     
     private Vector3 offset;
+
+    [SerializeField]
+    Rigidbody2D rb;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     private void Update()
     {
@@ -20,12 +27,12 @@ public class Drag : MonoBehaviour
 
     private void CalculatePosition()
     {
-        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
+        rb.MovePosition(Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset);
     }
 
     private void OnMouseDown()
     {
-        offset = dragObject.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
         dragging = true;
     }
 
