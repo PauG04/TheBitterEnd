@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Drag : MonoBehaviour
 {
-    [SerializeField] private GameObject dragObject;
 
     private bool dragging = false;
     
@@ -33,7 +32,7 @@ public class Drag : MonoBehaviour
 
     private void OnMouseDown()
     {
-        offset = dragObject.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
         dragging = true;
     }
 
