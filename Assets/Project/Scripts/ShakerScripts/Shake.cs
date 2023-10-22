@@ -34,7 +34,6 @@ public class Shake : MonoBehaviour
             SetShakerStata();
         }    
         slide.value = progress;
-        Debug.Log(name);
     }
 
     private void OnMouseDown()

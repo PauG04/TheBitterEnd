@@ -18,6 +18,9 @@ public class ShakerManager : MonoBehaviour
         Mixed
     }
 
+    [SerializeField]
+    private ShakerState shakerState;
+
     private void Awake()
     {
         ouncesInShaker = new List<BottleManager.typeOfDrink>();
@@ -39,6 +42,11 @@ public class ShakerManager : MonoBehaviour
     public List<BottleManager.typeOfDrink> GetOuncesInShaker()
     {
         return ouncesInShaker;
+    }
+
+    public void SetShakerState(ShakerManager.ShakerState state)
+    {
+        shakerState = state;
     }
 
 
