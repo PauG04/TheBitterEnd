@@ -1,3 +1,4 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,18 +17,24 @@ public class Shake : MonoBehaviour
     private bool isShakingDown;
     [SerializeField]
     private Slider slide;
+    private ShakerManager shakerManager;
 
-    
+    private void Start()
+    {
+        shakerManager = GetComponent<ShakerManager>();
+    }
+
     private void Update()
     {
-        if (shaking & progress<slide.maxValue)
+        if (shaking && progress<slide.maxValue)
         {
             DirectionShaker();
             IncreaseBar();
             SetVector();
-            
+            SetShakerStata();
         }    
         slide.value = progress;
+        Debug.Log(name);
     }
 
     private void OnMouseDown()
@@ -63,5 +70,21 @@ public class Shake : MonoBehaviour
             progress += (shakerPosition.y - newShakerPosition.y) / minimizeBarProgress;
         else
             progress += -(shakerPosition.y - newShakerPosition.y) / minimizeBarProgress;
+    }
+
+    void SetShakerStata()
+    {
+        if(progress >= slide.maxValue)
+        {
+            shakerManager.SetShakerState(ShakerManager.ShakerState.Shaked);
+        }
+        else if(progress > (slide.maxValue/2) && progress < slide.maxValue)
+        {
+            shakerManager.SetShakerState(ShakerManager.ShakerState.Mixed);
+        }
+        else
+        {
+            shakerManager.SetShakerState(ShakerManager.ShakerState.Idle);
+        }
     }
 }
