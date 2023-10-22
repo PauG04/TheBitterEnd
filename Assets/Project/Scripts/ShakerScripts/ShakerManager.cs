@@ -49,5 +49,10 @@ public class ShakerManager : MonoBehaviour
         shakerState = state;
     }
 
+    public ShakerState GetShakerState()
+    {
+        return shakerState;
+    }
+
 
 }
