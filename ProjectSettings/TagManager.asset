@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Shaker
   - Drink
+  - Fruit
+  - Knife
+  - End
+  - Start
   layers:
   - Default
   - TransparentFX
