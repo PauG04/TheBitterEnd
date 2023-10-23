@@ -71,7 +71,7 @@ public class Shake : MonoBehaviour
             progress += -(shakerPosition.y - newShakerPosition.y) / minimizeBarProgress;
     }
 
-    void SetShakerStata()
+    private void SetShakerStata()
     {
         if(progress >= slide.maxValue)
         {
@@ -85,5 +85,11 @@ public class Shake : MonoBehaviour
         {
             shakerManager.SetShakerState(ShakerManager.ShakerState.Idle);
         }
+    }
+
+    public void SetProgres(int slide)
+    {
+        progress = slide;
+        shakerManager.SetShakerState(ShakerManager.ShakerState.Idle);
     }
 }

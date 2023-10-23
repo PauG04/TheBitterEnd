@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DrinkTaken : MonoBehaviour
@@ -9,6 +10,8 @@ public class DrinkTaken : MonoBehaviour
     private DrinkScript drinkScript;
     [SerializeField]
     private GameObject cup;
+    [SerializeField]
+    private TMP_Text text;
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -16,6 +19,7 @@ public class DrinkTaken : MonoBehaviour
         {
             cup.SetActive(false);
             isDrinkPrepares = true;
+            text.text = string.Empty;
             Debug.Log("SI");
         }
     }

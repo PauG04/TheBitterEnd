@@ -15,7 +15,12 @@ public class Chat : MonoBehaviour
     private int minTimeBetweenOrder;
     [SerializeField]
     private int maxTimeBetweenOrder;
+    private DialogueSystem dialogueSystem;
 
+    private void Awake()
+    {
+        dialogueSystem = GetComponent<DialogueSystem>();
+    }
     private void Start()
     {
         maxTime = Random.Range(minTimeBetweenOrder, maxTimeBetweenOrder);
@@ -36,7 +41,7 @@ public class Chat : MonoBehaviour
     {
         DrinkTaken.SetIsDrinkPrepares(false);
         canTakeOrder = false;
-        Debug.Log("I want a Beer");
+        dialogueSystem.startDialogue();
     }
 
     private void Timer()
