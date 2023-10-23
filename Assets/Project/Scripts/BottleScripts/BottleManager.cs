@@ -8,31 +8,27 @@ public class BottleManager : MonoBehaviour
     private int maxOunces;
     private int currentOunces;
 
-    public enum typeOfDrink 
-    { 
-        //Alcoholic Drinks
-        Rum,
-        Gin,
-        Vodka,
-        Whiskey,
-        Tequila,
-        //Juices
-        OrangeJuice,
-        LemonJuice,
-        //Soft Drinks
-        Cola,
-        Soda,
-        Tonic
-    }
-
     [SerializeField]
-    private typeOfDrink type;
+    private DrinkManager.TypeOfDrink type;
 
     private void Awake()
     {
         currentOunces = maxOunces;
     }
 
+    #region Getters
+    public int GetCurrentOunces()
+    {
+        return currentOunces;
+    }
+
+    public DrinkManager.TypeOfDrink GetTypeOfDrink()
+    {
+        return type;
+    }
+    #endregion
+
+    #region Setters
     public void RefillOunces()
     {
         currentOunces = maxOunces;
@@ -42,14 +38,7 @@ public class BottleManager : MonoBehaviour
     {
         currentOunces--;
     }
+    #endregion
 
-    public int GetCurrentOunces()
-    { 
-        return currentOunces; 
-    }
 
-    public typeOfDrink GetTypeOfDrink()
-    {
-        return type;
-    }
 }
