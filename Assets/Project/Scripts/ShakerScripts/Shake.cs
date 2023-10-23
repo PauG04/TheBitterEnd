@@ -75,15 +75,15 @@ public class Shake : MonoBehaviour
     {
         if(progress >= slide.maxValue)
         {
-            shakerManager.SetShakerState(ShakerManager.ShakerState.Shaked);
+            shakerManager.SetShakerState(DrinkManager.DrinkState.Shaked);
         }
         else if(progress > (slide.maxValue/2) && progress < slide.maxValue)
         {
-            shakerManager.SetShakerState(ShakerManager.ShakerState.Mixed);
+            shakerManager.SetShakerState(DrinkManager.DrinkState.Mixed);
         }
         else
         {
-            shakerManager.SetShakerState(ShakerManager.ShakerState.Idle);
+            shakerManager.SetShakerState(DrinkManager.DrinkState.Idle);
         }
     }
 }

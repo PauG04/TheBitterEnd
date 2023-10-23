@@ -9,24 +9,16 @@ public class ShakerManager : MonoBehaviour
     private int currentOunces = 0;
     private bool isFull = false;
 
-    private List<BottleManager.typeOfDrink> ouncesInShaker;
+    private List<DrinkManager.TypeOfDrink> ouncesInShaker;
 
-    public enum ShakerState
-    {
-        Idle,
-        Shaked,
-        Mixed
-    }
-
-    [SerializeField]
-    private ShakerState shakerState;
+    private DrinkManager.DrinkState shakerState;
 
     private void Awake()
     {
-        ouncesInShaker = new List<BottleManager.typeOfDrink>();
+        ouncesInShaker = new List<DrinkManager.TypeOfDrink>();
     }
 
-    public void AddOunce(BottleManager.typeOfDrink ounceToAdd)
+    public void AddOunce(DrinkManager.TypeOfDrink ounceToAdd)
     {
         if (!isFull)
         {
@@ -39,20 +31,18 @@ public class ShakerManager : MonoBehaviour
         }
     }
 
-    public List<BottleManager.typeOfDrink> GetOuncesInShaker()
+    public List<DrinkManager.TypeOfDrink> GetOuncesInShaker()
     {
         return ouncesInShaker;
     }
 
-    public void SetShakerState(ShakerManager.ShakerState state)
-    {
-        shakerState = state;
-    }
-
-    public ShakerState GetShakerState()
+    public DrinkManager.DrinkState GetShakerState()
     {
         return shakerState;
     }
 
-
+    public void SetShakerState(DrinkManager.DrinkState state)
+    {
+        shakerState = state;
+    }
 }
