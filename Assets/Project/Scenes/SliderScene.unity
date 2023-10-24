@@ -349,6 +349,7 @@ MonoBehaviour:
   moveSlider: 0.7
   maxSlide: 4
   maxSlideDone: 6
+  slideDone: 0
 --- !u!212 &135687800
 SpriteRenderer:
   m_ObjectHideFlags: 0

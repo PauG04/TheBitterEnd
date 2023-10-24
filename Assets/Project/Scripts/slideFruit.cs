@@ -27,6 +27,10 @@ public class slideFruit : MonoBehaviour
         {
             SetKnifePosition();
         }
+        if (!Input.GetMouseButton(0))
+        {
+            startLine = false;
+        }
         if (slideMade == maxSlide)
         {
             app.SetActive(false);

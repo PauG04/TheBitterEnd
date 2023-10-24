@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class Slide : MonoBehaviour
 {
     private bool startLine;
+    private bool EndLine;
     [SerializeField]
     private GameObject slide;
     [SerializeField]
@@ -17,6 +18,7 @@ public class Slide : MonoBehaviour
     private int maxSlide;
     [SerializeField]
     private int maxSlideDone;
+    [SerializeField]
     private int slideDone = 0;
     private int slideMade;
     private Vector3 startVector;
@@ -31,6 +33,11 @@ public class Slide : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             SetKnifePosition();
+        }
+        if(!Input.GetMouseButton(0))
+        {
+            startLine = false;
+            EndLine = false;
         }
         if(slideMade == maxSlide)
         {
@@ -55,27 +62,26 @@ public class Slide : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("End"))
         {
-            if(slideDone % 2 != 0)
-            {
-                startLine = true;
-            }
-            else if(startLine==true)
-            {
-                startLine = false;
+            if (startLine && !EndLine)
+            {            
                 slideDone++;
+                startLine = false;
             }
-            
+            if (slideDone % 2 != 0)
+            {
+                EndLine = true;
+            }         
         }
         if (collision.gameObject.CompareTag("Start"))
         {
-            if(slideDone % 2 == 0)
+            if (EndLine && !startLine)
+            {
+                slideDone++;
+                EndLine = false;               
+            }
+            if (slideDone % 2 == 0)
             {
                 startLine = true;
-            }
-            else if (startLine == true)
-            {
-                startLine = false;
-                slideDone++;
             }
         }
     }
@@ -85,6 +91,7 @@ public class Slide : MonoBehaviour
         if (collision.gameObject.CompareTag("Ice"))
         {
             startLine= false;
+            EndLine= false;
         }
     }
 
