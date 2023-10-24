@@ -419,7 +419,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!50 &205691209
 Rigidbody2D:
   serializedVersion: 4
@@ -580,7 +580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &295614267
 Rigidbody2D:
   serializedVersion: 4
@@ -1576,8 +1576,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1981191942}
   - component: {fileID: 1981191941}
-  - component: {fileID: 1981191940}
   - component: {fileID: 1981191943}
+  - component: {fileID: 1981191944}
   m_Layer: 0
   m_Name: knife
   m_TagString: Knife
@@ -1585,23 +1585,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1981191940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1981191939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2edb4fea1504027488d27158d63c60a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slide: {fileID: 2116410757}
-  app: {fileID: 295614266}
-  moveSlider: 0.5
-  maxSlide: 7
-  maxSlideDone: 0
 --- !u!212 &1981191941
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1714,6 +1697,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1981191944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981191939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f5bf3b9d9a54d64ea717f65d83c1fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slide: {fileID: 2116410757}
+  app: {fileID: 295614266}
+  moveSlider: 0.5
+  maxSlide: 7
 --- !u!1 &2116410757
 GameObject:
   m_ObjectHideFlags: 0
