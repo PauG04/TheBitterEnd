@@ -10,6 +10,7 @@ TagManager:
   - Knife
   - End
   - Start
+  - Ice
   layers:
   - Default
   - TransparentFX

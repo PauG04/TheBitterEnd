@@ -15,6 +15,9 @@ public class Slide : MonoBehaviour
     private float moveSlider;
     [SerializeField]
     private int maxSlide;
+    [SerializeField]
+    private int maxSlideDone;
+    private int slideDone = 0;
     private int slideMade;
     private Vector3 startVector;
 
@@ -34,6 +37,10 @@ public class Slide : MonoBehaviour
             app.SetActive(false);
             slide.transform.position = startVector;
         }
+        if(slideDone == maxSlideDone)
+        {
+            RestartSlide();
+        }
     }
 
     private void SetKnifePosition()
@@ -46,24 +53,46 @@ public class Slide : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("End") && startLine)
+        if(collision.gameObject.CompareTag("End"))
         {
-            slide.transform.position = new Vector3(slide.transform.position.x - moveSlider, slide.transform.position.y, slide.transform.position.z);
-            slideMade++;
-            startLine = false;
+            if(slideDone % 2 != 0)
+            {
+                startLine = true;
+            }
+            else if(startLine==true)
+            {
+                startLine = false;
+                slideDone++;
+            }
+            
         }
         if (collision.gameObject.CompareTag("Start"))
         {
-            startLine = true;
+            if(slideDone % 2 == 0)
+            {
+                startLine = true;
+            }
+            else if (startLine == true)
+            {
+                startLine = false;
+                slideDone++;
+            }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Fruit"))
+        if (collision.gameObject.CompareTag("Ice"))
         {
             startLine= false;
         }
+    }
+
+    private void RestartSlide()
+    {
+        slide.transform.position = new Vector3(slide.transform.position.x - moveSlider, slide.transform.position.y, slide.transform.position.z);
+        slideMade++;
+        slideDone = 0;
     }
 
 }
