@@ -10,12 +10,17 @@ public class DragWindows : MonoBehaviour
     private Vector2 mousePos;
     private Transform parentObject;
 
-    private void Awake()
+    private void Start()
     {
         parentObject = transform.parent;
     }
 
     private void Update()
+    {
+        Drag();
+    }
+
+    private void Drag()
     {
         if (isDragging)
         {
@@ -27,7 +32,7 @@ public class DragWindows : MonoBehaviour
 
     private void OnMouseDown()
     {
-        offset = parentObject.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        offset = new Vector3(parentObject.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x, parentObject.position.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
         isDragging = true;
     }
 
@@ -35,4 +40,5 @@ public class DragWindows : MonoBehaviour
     {
         isDragging = false;
     }
+
 }
