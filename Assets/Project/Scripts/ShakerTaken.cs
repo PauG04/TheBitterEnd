@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShakerTaken : MonoBehaviour
 {
     [SerializeField]
-    private ShakerManager shakerManager;
+    private Drink shaker;
     [SerializeField]
     private DrinkScript drinkScript;
     [SerializeField]
@@ -15,9 +15,9 @@ public class ShakerTaken : MonoBehaviour
     {
         if (collision.tag == "Shaker" && drinkScript.GetIsMouseNotPressed())
         {
-            shakerManager.GetShakerState();
+            shaker.GetDrinkState();
             cup.SetActive(true);
-            Debug.Log(shakerManager.GetShakerState());
+            Debug.Log(shaker.GetDrinkState());
         }
     }
    
