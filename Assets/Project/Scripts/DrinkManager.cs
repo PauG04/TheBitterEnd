@@ -31,18 +31,18 @@ public class DrinkManager : MonoBehaviour
     }
     #endregion
 
-    private List<TypeOfDrink> typeOfDrinks;
+    private List<TypeOfDrink> typeOfOunces;
     private DrinkState drinkState;
 
     private void Awake()
     {
-        typeOfDrinks = new List<TypeOfDrink>();
+        typeOfOunces = new List<TypeOfDrink>();
     }
 
     #region GETTERS
-    public List<TypeOfDrink> GetTypeOfDrinks()
+    public List<TypeOfDrink> GetTypeOfOunces()
     {
-        return typeOfDrinks;
+        return typeOfOunces;
     }
 
     public DrinkState GetDrinkState()
