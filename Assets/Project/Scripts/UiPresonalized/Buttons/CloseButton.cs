@@ -16,7 +16,6 @@ public class CloseButton : Button
 
     private void CloseApp()
     {
-        Debug.Log(gameObject.name);
-        //Destroy(objectToDestroy.gameObject);
+        objectToDestroy.SetActive(false);
     }
 }

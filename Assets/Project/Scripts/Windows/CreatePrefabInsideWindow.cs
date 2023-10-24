@@ -11,4 +11,9 @@ public class CreatePrefabInsideWindow : MonoBehaviour
         GameObject prefabInstance = Instantiate(prefab);
         prefabInstance.transform.parent = transform;
     }
+
+    public GameObject GetPrefab()
+    {
+        return prefab;
+    }
 }

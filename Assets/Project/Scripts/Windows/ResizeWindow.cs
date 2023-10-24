@@ -5,8 +5,12 @@ using UnityEngine;
 public class ResizeWindow : MonoBehaviour
 {
     // Change to autodetect the sibling gameObject
-    [SerializeField] private GameObject prefab;
+
     [SerializeField] private Transform windowControl;
+
+    private GameObject parent;
+    //private BoxCollider2D parentCollider;
+    private GameObject prefab;
 
     [Header("Offset")]
     [SerializeField] private float offsetWidth = 0.02f;
@@ -18,6 +22,9 @@ public class ResizeWindow : MonoBehaviour
     {
         #region GetComponents
         spriteRenderer = GetComponent<SpriteRenderer>();
+        parent = transform.parent.gameObject;
+        prefab = parent.GetComponent<CreatePrefabInsideWindow>().GetPrefab();
+        //parentCollider = parent.GetComponent<BoxCollider2D>();
         spriteRenderer.drawMode = SpriteDrawMode.Tiled;
         #endregion
 
@@ -30,6 +37,7 @@ public class ResizeWindow : MonoBehaviour
         gameObject.transform.parent.transform.position = prefab.transform.position;
         Vector2 newWindowSize = new Vector2(prefab.transform.localScale.x + offsetWidth, prefab.transform.localScale.y + offsetHeight);
         spriteRenderer.size = newWindowSize;
+        //parentCollider.size = newWindowSize;
     }
 
     void SetWindowControlPosition()

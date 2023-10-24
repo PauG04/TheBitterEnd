@@ -13,8 +13,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Window
+  - Border
   - 
   - 
   - 
@@ -42,4 +42,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Window
+    uniqueID: 3939692893
+    locked: 0
+  - name: RunningApp
+    uniqueID: 3388101939
     locked: 0
