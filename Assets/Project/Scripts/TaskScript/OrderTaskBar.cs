@@ -10,6 +10,8 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField]
     private SetTaskBarPosition setTaskBarPosition;
     private bool isOpen = false;
+    [SerializeField]
+    private int differenceX;
 
     private void Awake()
     {
@@ -20,15 +22,30 @@ public class NewBehaviourScript : MonoBehaviour
         if (openApp.GetIsOpen() && !isOpen)
         {
             openMinimizeWindow();
+        }      
+    }
+
+    private void Update()
+    {                 
+        if (!openApp.GetIsOpen() && isOpen)
+        {
+            closeMinimizeWindos();
         }
     }
 
-    private void openMinimizeWindow()
+    public void openMinimizeWindow()
     {
-        appMinimize.transform.position = setTaskBarPosition.GetBarPosition();
-        setTaskBarPosition.SetXPosition();
-        appMinimize.SetActive(true);
         isOpen = true;
+    }
+
+    private void closeMinimizeWindos()
+    {
+        isOpen = false;
+    }
+
+    public bool IsOpen()
+    {
+        return isOpen;
     }
 
 }

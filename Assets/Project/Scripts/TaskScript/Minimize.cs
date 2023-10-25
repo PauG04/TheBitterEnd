@@ -8,6 +8,8 @@ public class Minimize : MonoBehaviour
     private bool isMinimize = false;
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider2D;
+    [SerializeField]
+    private OpenApp openApp;
 
     private void Awake()
     {
@@ -27,11 +29,19 @@ public class Minimize : MonoBehaviour
             spriteRenderer.enabled = true;
             boxCollider2D.enabled = true;
         }
+        
     }
 
     private void OnMouseDown()
     {
-        isMinimize = true;
+        if (Input.GetMouseButtonDown(0))
+            isMinimize = true;           
+    }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(1))
+            openApp.DesactiveApp();
     }
 
     public void SetIsMinimize()

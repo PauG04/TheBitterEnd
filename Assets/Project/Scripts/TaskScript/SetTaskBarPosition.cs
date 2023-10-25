@@ -1,22 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SetTaskBarPosition : MonoBehaviour
 {
     [SerializeField]
     private float xPosition;
-    private bool notMovet = false;
-    public Vector3 GetBarPosition()
+    [SerializeField]
+    private float xPosition2;
+    [SerializeField]
+    private NewBehaviourScript[] orderTaskBar;
+    [SerializeField]
+    private bool[] isOpen;
+    private SetMinimize setMinimize;
+
+    private void Awake()
     {
-        return new Vector3(xPosition, transform.position.y, transform.position.z);
+        setMinimize= GetComponent<SetMinimize>();
+    }
+    private void Update()
+    {
+        for (int i = 0; i< setMinimize.icon.Length; i++) 
+        {
+            OpenIcon(i);
+            CloseIcon(i);
+        }       
     }
 
-    public void SetXPosition()
+    private void OpenIcon(int i)
     {
-        xPosition += 2;
-
+        if (orderTaskBar[i].IsOpen() && !isOpen[i])
+        {
+            setMinimize.icon[i].transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
+            setMinimize.icon[i].SetActive(true);
+            SetXPosition(2);
+            isOpen[i] = true;
+        }
     }
 
+    private void CloseIcon(int i)
+    {
+        if (!orderTaskBar[i].IsOpen() && isOpen[i])
+        {
+            setMinimize.icon[i].SetActive(false);
+            SetXPosition2();
+            for (int j = 0; j < isOpen.Length; j++)
+            {
+                isOpen[j] = false;
+            }
+        }
+    }
+
+    private void SetXPosition(float x)
+    {
+        xPosition += x;
+    }
+
+    private void SetXPosition2()
+    {
+        xPosition = xPosition2;
+    }
+ 
 }
 

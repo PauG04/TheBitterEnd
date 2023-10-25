@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class OpenApp : MonoBehaviour
@@ -14,13 +15,18 @@ public class OpenApp : MonoBehaviour
         {
             app.SetActive(true);
             isOpen = true;
-
         }
     }
 
     public bool GetIsOpen()
     {
         return isOpen;
+    }
+
+    public void DesactiveApp()
+    {
+        app.SetActive(false);
+        isOpen= false;
     }
 }
 
