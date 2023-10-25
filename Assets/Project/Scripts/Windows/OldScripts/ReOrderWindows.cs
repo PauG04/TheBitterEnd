@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,31 +7,37 @@ using UnityEngine.Rendering;
 public class ReOrderWindows : Button
 {
     private GetListOfWindows listOfWindows;
-    private SortingGroup sortingGroup;
-    private int numberOfWindows;
     private List<GameObject> windows;
+    
 
     private void Awake()
     {
-        #region Get Components
         listOfWindows = transform.parent.GetComponent<GetListOfWindows>();
-        sortingGroup = GetComponent<SortingGroup>();
-        #endregion
+    }
 
-        numberOfWindows = listOfWindows.GetNumberOfWindows();
+    private void Start()
+    {
         windows = listOfWindows.GetWindowsList();
+
+        MoveGameObjectInZ();
     }
 
-    private void Update()
+    public void OrderGroupLayer(GameObject pressedObject)
     {
-        if (SimulateButton(gameObject.name))
+        if (windows.Contains(pressedObject))
         {
-            OrderGroupLayer();
+            windows.Remove(pressedObject);
         }
+        windows.Insert(0, pressedObject);
+
+        MoveGameObjectInZ();
     }
 
-    private void OrderGroupLayer()
+    private void MoveGameObjectInZ()
     {
-        //sortingGroup.sortingOrder = numberOfWindows;
+        for (int i = 0; i < windows.Count; i++)
+        {
+            windows[i].transform.position = new Vector3(windows[i].transform.position.x, windows[i].transform.position.y, i);
+        }
     }
 }

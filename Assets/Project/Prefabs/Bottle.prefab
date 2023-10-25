@@ -86,7 +86,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &3217920795354210755
@@ -117,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialOffset: {x: -3.5, y: 1.8, z: 0}
   currentWindowPosition: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!114 &8219162201676733773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4caae91bcdaa79e46926e9eaca44a588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxCollider: {fileID: 4124702585738203602}
+  ouncesCounter: {fileID: 0}
+  shaker: {fileID: 0}
   shakerCollider: {fileID: 0}
 --- !u!61 &4124702585738203602
 BoxCollider2D:

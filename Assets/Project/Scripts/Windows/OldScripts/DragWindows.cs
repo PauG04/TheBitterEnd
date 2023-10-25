@@ -7,12 +7,14 @@ public class DragWindows : MonoBehaviour
     private bool isDragging = false;
     private Vector3 offset;
 
-    private Vector2 mousePos;
-    private Transform parentObject;
+    private Vector3 mousePos;
+    private GameObject parentObject;
 
-    private void Start()
+    [SerializeField] private ReOrderWindows reOrderWindows;
+
+    private void Awake()
     {
-        parentObject = transform.parent;
+        parentObject = transform.parent.gameObject;
     }
 
     private void Update()
@@ -25,14 +27,18 @@ public class DragWindows : MonoBehaviour
         if (isDragging)
         {
             Vector3 mousePosToWorldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePos = new Vector2(mousePosToWorldPoint.x + offset.x, mousePosToWorldPoint.y + offset.y);
-            parentObject.position = mousePos;
+            mousePos = new Vector3(mousePosToWorldPoint.x + offset.x, mousePosToWorldPoint.y + offset.y, parentObject.transform.position.z);
+            parentObject.transform.position = mousePos;
+            reOrderWindows.OrderGroupLayer(parentObject);
         }
     }
 
     private void OnMouseDown()
     {
-        offset = new Vector3(parentObject.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x, parentObject.position.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+        offset = new Vector3(
+            parentObject.transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x, 
+            parentObject.transform.position.y - Camera.main.ScreenToWorldPoint(Input.mousePosition).y
+            );
         isDragging = true;
     }
 
