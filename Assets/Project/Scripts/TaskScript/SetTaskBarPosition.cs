@@ -1,22 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 public class SetTaskBarPosition : MonoBehaviour
 {
     [SerializeField]
     private float xPosition;
-    private float xPosition2;
-    [SerializeField]
     private float orignalX;
-    private int sume = 0;
-    private bool[] isRight;
     [SerializeField]
     private NewBehaviourScript[] orderTaskBar;
     private bool[] isOpen;
+    private bool[] isPrinted;
     private SetMinimize setMinimize;
+    [SerializeField]
+    private GameObject[] orderIcon;
+    private bool[] isRight;
+    private int currentIcon = 0;
+    [SerializeField]
+    private float distance;
 
     private void Awake()
     {
@@ -25,50 +30,71 @@ public class SetTaskBarPosition : MonoBehaviour
 
     private void Start()
     {
-        isOpen = new bool[orderTaskBar.Length];
+        orderIcon = new GameObject[orderTaskBar.Length];
+        isOpen = new bool[orderTaskBar.Length];       
+        isPrinted= new bool[orderTaskBar.Length];
         isRight = new bool[orderTaskBar.Length];
         for(int i = 0; i<isOpen.Length; i++) 
         {
             isOpen[i] = false;
+            isPrinted[i] = false;
             isRight[i] = false;
         }
         orignalX = xPosition;
-        xPosition2 = xPosition;
     }
     private void Update()
-    {       
-        OpenIcon();
-        CloseIcon();          
+    {
+        OpenApp();
+        PrintIcon();
+        CloseIcon();
     }
 
-    private void OpenIcon()
+    private void OpenApp()
     {
         for (int i = 0; i < setMinimize.icon.Length; i++)
         {
             if (orderTaskBar[i].IsOpen() && !isOpen[i])
-            {  
-                    setMinimize.icon[i].transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
-                
-                setMinimize.icon[i].SetActive(true);
-                SetXPosition(2);
+            {
+                orderIcon[currentIcon] = setMinimize.icon[i];
+                isPrinted[currentIcon] = true;
+                isRight[currentIcon] = true;
                 isOpen[i] = true;
+                currentIcon++; 
             }
         }
-        sume = 0;
+    }
 
+    private void PrintIcon()
+    {
+        for (int i = 0; i < orderIcon.Length; i++)
+        {
+            if (isPrinted[i] && isRight[i] && orderIcon[i] != null) 
+            {
+                orderIcon[i].transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
+                orderIcon[i].SetActive(true);
+                SetXPosition(distance);             
+                isPrinted[i] = false;
+                isRight[i] = false;
+            }
+        }
     }
 
     private void CloseIcon()
     {
+        int currentI;
         for (int i = 0; i < setMinimize.icon.Length; i++)
         {
+            currentI = 0;
             if (!orderTaskBar[i].IsOpen() && isOpen[i])
             {
-                setMinimize.icon[i].SetActive(false);
+                currentI = FinOrderIcon(setMinimize.icon[i]);
+                OrderTask(currentI);
+                SetIsRight(currentI);
                 setOriginalX(setMinimize.icon[i].transform.position.x);
-                SetIsOpenFalse();
-                SetIsRightTrue(i);
+                SetIsPrinted();
+                isOpen[i] = false;            
             }
+
         }
 
     }
@@ -83,26 +109,43 @@ public class SetTaskBarPosition : MonoBehaviour
         xPosition = position;
     }
 
-    private void SetIsOpenFalse()
+    private int FinOrderIcon(GameObject icon)
     {
-        for (int j = 0; j < isOpen.Length; j++)
+        int i = 0;
+        while (icon.transform.position.x != orderIcon[i].transform.position.x)
         {
-            isOpen[j] = false;
+            i++;              
+        }
+        orderIcon[i].SetActive(false);
+        return i;
+    }
+
+    private void OrderTask(int currentI)
+    {
+        for (int i = currentI; i < orderIcon.Length - 1; i++)
+        {
+            orderIcon[i] = orderIcon[i+1];
+        }
+        orderIcon[orderIcon.Length - 1] = null;
+        currentIcon--;
+    }
+
+    private void SetIsPrinted()
+    {
+        for(int i = 0; i<orderIcon.Length; i++) 
+        {
+            if (orderIcon[i] != null)
+                isPrinted[i] = true;
         }
     }
 
-    private void SetIsRightTrue(int i)
+    private void SetIsRight(int currentI)
     {
-        for(int j = 0; j < isOpen.Length; j++)
+        for (int i = currentI; i < orderIcon.Length; i++)
         {
-            if(setMinimize.icon[j].transform.position.x > xPosition)
-            {
-                isOpen[j] = false;
-                Debug.Log("si");
-            }
-                
+            isRight[i] = true;
         }
     }
- 
+
 }
 
