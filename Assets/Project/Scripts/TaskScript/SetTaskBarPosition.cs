@@ -8,8 +8,11 @@ public class SetTaskBarPosition : MonoBehaviour
 {
     [SerializeField]
     private float xPosition;
-    [SerializeField]
     private float xPosition2;
+    [SerializeField]
+    private float orignalX;
+    private int sume = 0;
+    private bool[] isRight;
     [SerializeField]
     private NewBehaviourScript[] orderTaskBar;
     private bool[] isOpen;
@@ -23,42 +26,51 @@ public class SetTaskBarPosition : MonoBehaviour
     private void Start()
     {
         isOpen = new bool[orderTaskBar.Length];
+        isRight = new bool[orderTaskBar.Length];
         for(int i = 0; i<isOpen.Length; i++) 
         {
             isOpen[i] = false;
+            isRight[i] = false;
         }
+        orignalX = xPosition;
+        xPosition2 = xPosition;
     }
     private void Update()
-    {
-        for (int i = 0; i< setMinimize.icon.Length; i++) 
-        {
-            OpenIcon(i);
-            CloseIcon(i);
-        }       
+    {       
+        OpenIcon();
+        CloseIcon();          
     }
 
-    private void OpenIcon(int i)
+    private void OpenIcon()
     {
-        if (orderTaskBar[i].IsOpen() && !isOpen[i])
+        for (int i = 0; i < setMinimize.icon.Length; i++)
         {
-            setMinimize.icon[i].transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
-            setMinimize.icon[i].SetActive(true);
-            SetXPosition(2);
-            isOpen[i] = true;
-        }
-    }
-
-    private void CloseIcon(int i)
-    {
-        if (!orderTaskBar[i].IsOpen() && isOpen[i])
-        {
-            setMinimize.icon[i].SetActive(false);
-            SetXPosition2();
-            for (int j = 0; j < isOpen.Length; j++)
-            {
-                isOpen[j] = false;
+            if (orderTaskBar[i].IsOpen() && !isOpen[i])
+            {  
+                    setMinimize.icon[i].transform.position = new Vector3(xPosition, transform.position.y, transform.position.z);
+                
+                setMinimize.icon[i].SetActive(true);
+                SetXPosition(2);
+                isOpen[i] = true;
             }
         }
+        sume = 0;
+
+    }
+
+    private void CloseIcon()
+    {
+        for (int i = 0; i < setMinimize.icon.Length; i++)
+        {
+            if (!orderTaskBar[i].IsOpen() && isOpen[i])
+            {
+                setMinimize.icon[i].SetActive(false);
+                setOriginalX(setMinimize.icon[i].transform.position.x);
+                SetIsOpenFalse();
+                SetIsRightTrue(i);
+            }
+        }
+
     }
 
     private void SetXPosition(float x)
@@ -66,9 +78,30 @@ public class SetTaskBarPosition : MonoBehaviour
         xPosition += x;
     }
 
-    private void SetXPosition2()
+    private void setOriginalX(float position)
     {
-        xPosition = xPosition2;
+        xPosition = position;
+    }
+
+    private void SetIsOpenFalse()
+    {
+        for (int j = 0; j < isOpen.Length; j++)
+        {
+            isOpen[j] = false;
+        }
+    }
+
+    private void SetIsRightTrue(int i)
+    {
+        for(int j = 0; j < isOpen.Length; j++)
+        {
+            if(setMinimize.icon[j].transform.position.x > xPosition)
+            {
+                isOpen[j] = false;
+                Debug.Log("si");
+            }
+                
+        }
     }
  
 }
