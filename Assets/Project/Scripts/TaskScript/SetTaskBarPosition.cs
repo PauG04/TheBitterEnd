@@ -12,13 +12,21 @@ public class SetTaskBarPosition : MonoBehaviour
     private float xPosition2;
     [SerializeField]
     private NewBehaviourScript[] orderTaskBar;
-    [SerializeField]
     private bool[] isOpen;
     private SetMinimize setMinimize;
 
     private void Awake()
     {
         setMinimize= GetComponent<SetMinimize>();
+    }
+
+    private void Start()
+    {
+        isOpen = new bool[orderTaskBar.Length];
+        for(int i = 0; i<isOpen.Length; i++) 
+        {
+            isOpen[i] = false;
+        }
     }
     private void Update()
     {

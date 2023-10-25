@@ -33,7 +33,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
     }
 
-    public void openMinimizeWindow()
+    private void openMinimizeWindow()
     {
         isOpen = true;
     }
