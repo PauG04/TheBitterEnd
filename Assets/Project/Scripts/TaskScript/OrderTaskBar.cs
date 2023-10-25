@@ -5,14 +5,7 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
     private OpenApp openApp;
-    [SerializeField]
-    private GameObject appMinimize;
-    [SerializeField]
-    private SetTaskBarPosition setTaskBarPosition;
     private bool isOpen = false;
-    [SerializeField]
-    private int differenceX;
-
     private void Awake()
     {
         openApp = GetComponent<OpenApp>();
