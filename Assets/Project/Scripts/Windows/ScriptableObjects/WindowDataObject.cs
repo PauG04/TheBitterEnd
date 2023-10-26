@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Applications/New App")]
+[CreateAssetMenu(menuName = "New Windows")]
 public class WindowDataObject : ScriptableObject
 {
     public SerializableWindows values;

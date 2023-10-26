@@ -10,12 +10,7 @@ public class CloseButton : Button
     {
         if(SimulateButton(gameObject.name))
         {
-            CloseApp();
+            
         }
-    }
-
-    private void CloseApp()
-    {
-        objectToDestroy.SetActive(false);
     }
 }
