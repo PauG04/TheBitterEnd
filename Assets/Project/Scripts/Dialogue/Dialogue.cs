@@ -65,5 +65,20 @@ using UnityEngine;
             nodes.Add(newNode);
             OnValidate();
         }
+
+        public void DeleteNode(DialogueNode nodeToDelete)
+        {
+            nodes.Remove(nodeToDelete);
+            OnValidate();
+            CleanDanglingChilndren(nodeToDelete);
+        }
+
+        private void CleanDanglingChilndren(DialogueNode nodeToDelete)
+        {
+            foreach (DialogueNode node in GetAllNodes())
+            {
+                node.children.Remove(nodeToDelete.uniqueID);
+            }
+        }
     }
 }

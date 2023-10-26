@@ -1,19 +1,25 @@
 using System;
 using UnityEditor;
 using UnityEditor.Callbacks;
-using UnityEditor.MPE;
 using UnityEngine;
 
 namespace Dialogue.Editor
 {
     public class DialogueEditor : EditorWindow
     {
-        Dialogue selectedDialogue = null;
+        private Dialogue selectedDialogue = null;
 
-        [NonSerialized] GUIStyle nodeStyle;
-        [NonSerialized] DialogueNode draggingNode = null;
-        [NonSerialized] Vector2 draggingOffset;
-        [NonSerialized] DialogueNode creatingNode = null;
+        [NonSerialized] private GUIStyle nodeStyle;
+        [NonSerialized] private DialogueNode draggingNode = null;
+        [NonSerialized] private Vector2 draggingOffset;
+
+        #region Buttons
+        [NonSerialized] private DialogueNode creatingNode = null;
+        [NonSerialized] private DialogueNode deletingNode = null;
+        [NonSerialized] private DialogueNode linkParentNode = null;
+        #endregion
+
+        private Vector2 scrollPosition;
 
         [MenuItem("Editor/Dialogue Editor")]
         public static void ShowEditorWindow()
@@ -62,7 +68,10 @@ namespace Dialogue.Editor
             if (selectedDialogue != null)
             {
                 ProcessEvent();
-                
+
+                scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
+
+                GUILayoutUtility.GetRect(4000, 4000);
 
                 foreach (DialogueNode node in selectedDialogue.GetAllNodes())
                 {
@@ -73,11 +82,20 @@ namespace Dialogue.Editor
                 {
                     DrawNode(node);
                 }
+
+                EditorGUILayout.EndScrollView();
+
                 if(creatingNode != null)
                 {
                     Undo.RecordObject(selectedDialogue, "Added Dialogue Node");
                     selectedDialogue.CreateNode(creatingNode);
                     creatingNode = null;
+                }
+                if (deletingNode != null)
+                {
+                    Undo.RecordObject(selectedDialogue, "Deleted Dialogue Node");
+                    selectedDialogue.DeleteNode(deletingNode);
+                    deletingNode = null;
                 }
             }
             else
@@ -113,8 +131,6 @@ namespace Dialogue.Editor
             GUILayout.BeginArea(node.rect, nodeStyle);
             EditorGUI.BeginChangeCheck();
 
-            EditorGUILayout.LabelField("Node: ", EditorStyles.whiteLabel);
-
             string newText = EditorGUILayout.TextField(node.text);
 
             if (EditorGUI.EndChangeCheck())
@@ -124,13 +140,60 @@ namespace Dialogue.Editor
                 node.text = newText;
             }
 
+            DrawLinkButton(node);
+
+            GUILayout.BeginHorizontal();
+
+            if (GUILayout.Button("-"))
+            {
+                deletingNode = node;
+            }
             if (GUILayout.Button("+"))
             {
                 creatingNode = node;
             }
 
+            GUILayout.EndHorizontal();
+
             GUILayout.EndArea();
         }
+
+        private void DrawLinkButton(DialogueNode node)
+        {
+            if (linkParentNode == null)
+            {
+                if (GUILayout.Button("LINK"))
+                {
+                    linkParentNode = node;
+                }
+            }
+            else if(linkParentNode == node)
+            {
+                if (GUILayout.Button("CANCEL"))
+                {
+                    linkParentNode = null;
+                }
+            }
+            else if(linkParentNode.children.Contains(node.uniqueID))
+            {
+                if (GUILayout.Button("UNLINK"))
+                {
+                    Undo.RecordObject(selectedDialogue, "Remove Dialogue Link");
+                    linkParentNode.children.Remove(node.uniqueID);
+                    linkParentNode = null;
+                }
+            }
+            else
+            {
+                if (GUILayout.Button("CHILD"))
+                {
+                    Undo.RecordObject(selectedDialogue, "Add Dialogue Link");
+                    linkParentNode.children.Add(node.uniqueID);
+                    linkParentNode = null;
+                }
+            }
+        }
+
         private void DrawConnections(DialogueNode node)
         {
             Vector3 startPosition = new Vector2(node.rect.xMax, node.rect.center.y);
