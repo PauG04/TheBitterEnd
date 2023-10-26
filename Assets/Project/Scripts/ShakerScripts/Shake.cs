@@ -17,11 +17,11 @@ public class Shake : MonoBehaviour
     private bool isShakingDown;
     [SerializeField]
     private Slider slide;
-    private ShakerManager shakerManager;
+    private Drink shaker;
 
     private void Start()
     {
-        shakerManager = GetComponent<ShakerManager>();
+        shaker = GetComponent<Drink>();
     }
 
     private void Update()
@@ -75,15 +75,15 @@ public class Shake : MonoBehaviour
     {
         if(progress >= slide.maxValue)
         {
-            shakerManager.SetShakerState(ShakerManager.ShakerState.Shaked);
+            shaker.SetDrinkState(Drink.DrinkState.Shaked);
         }
         else if(progress > (slide.maxValue/2) && progress < slide.maxValue)
         {
-            shakerManager.SetShakerState(ShakerManager.ShakerState.Mixed);
+            shaker.SetDrinkState(Drink.DrinkState.Mixed);
         }
         else
         {
-            shakerManager.SetShakerState(ShakerManager.ShakerState.Idle);
+            shaker.SetDrinkState(Drink.DrinkState.Idle);
         }
     }
 }

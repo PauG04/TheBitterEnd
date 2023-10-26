@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CheckDrink : MonoBehaviour
 {
-    private bool CheckCorrectOunces(List<BottleManager.typeOfDrink> wantedDrink, List<BottleManager.typeOfDrink> makedDrink)
+    private bool CheckCorrectOunces(List<Drink.TypeOfDrink> wantedDrink, List<Drink.TypeOfDrink> makedDrink)
     {
         wantedDrink.Sort(SortFunc);
         makedDrink.Sort(SortFunc);
@@ -13,7 +13,7 @@ public class CheckDrink : MonoBehaviour
         return false;
     }
 
-    private int SortFunc(BottleManager.typeOfDrink a, BottleManager.typeOfDrink b)
+    private int SortFunc(Drink.TypeOfDrink a, Drink.TypeOfDrink b)
     {
         if (a < b)
         {
@@ -27,7 +27,7 @@ public class CheckDrink : MonoBehaviour
     }
 
     //Esta funcion se tiene q mejorar
-    private bool CompareOuncesLists(List<BottleManager.typeOfDrink> wantedDrink, List<BottleManager.typeOfDrink> makedDrink)
+    private bool CompareOuncesLists(List<Drink.TypeOfDrink> wantedDrink, List<Drink.TypeOfDrink> makedDrink)
     {
         if (wantedDrink.Count != makedDrink.Count)
             return false;

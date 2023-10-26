@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PourOunces : MonoBehaviour
 {
-    private BottleManager bottle;
+    private Bottle bottle;
 
     [SerializeField]
     private OuncesCounter ouncesCounter;
 
     [SerializeField]
-    private ShakerManager shaker;
+    private Drink shaker;
 
     private BoxCollider2D boxCollider;
 
@@ -19,7 +19,7 @@ public class PourOunces : MonoBehaviour
 
     private void Awake()
     {
-        bottle = GetComponent<BottleManager>();
+        bottle = GetComponent<Bottle>();
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
@@ -27,8 +27,8 @@ public class PourOunces : MonoBehaviour
     {
         if (boxCollider.IsTouching(shakerCollider) && bottle.GetCurrentOunces() > 0)
         {
-            shaker.AddOunce(bottle.GetTypeOfDrink());
-            bottle.SubtractOneOunce();
+            shaker.AddOunce(bottle.GetTypeOfOunces()[0]);
+            bottle.SubstractOneOunce();
             ouncesCounter.AddOneToCounter();
         }
     }
