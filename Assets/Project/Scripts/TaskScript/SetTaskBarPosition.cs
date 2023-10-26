@@ -12,7 +12,7 @@ public class SetTaskBarPosition : MonoBehaviour
     private float xPosition;
     private float orignalX;
     [SerializeField]
-    private NewBehaviourScript[] orderTaskBar;
+    private OrderTaskBar[] orderTaskBar;
     private bool[] isOpen;
     private bool[] isPrinted;
     private SetMinimize setMinimize;

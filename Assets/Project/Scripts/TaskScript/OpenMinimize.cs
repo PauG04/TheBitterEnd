@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpenMinimize : MonoBehaviour
+public class OpenMinimize : Button
 {
     [SerializeField]
-    private Minimize minimize;
+    private GameObject minimize;
 
-    private void OnMouseDown()
+    private void Update()
     {
-            minimize.SetIsMinimize();      
+        if (SimulateButton(gameObject.name))
+        {
+            minimize.gameObject.SetActive(true);
+        }
     }
 }

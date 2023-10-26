@@ -13,50 +13,54 @@ MonoBehaviour:
   m_Name: New Dialogue
   m_EditorClassIdentifier: 
   nodes:
-  - UniqueID: 1
-    text: Marcos
+  - uniqueID: 0
+    text: test
     children:
     - 
     - 
-    position:
+    rect:
       serializedVersion: 2
-      x: 0
-      y: 0
+      x: 808
+      y: 114
       width: 200
-      height: 200
-  - UniqueID: 2
-    text: Guarro
+      height: 100
+  - uniqueID: 1
+    text: test
+    children:
+    - 2
+    - 3
+    rect:
+      serializedVersion: 2
+      x: 275
+      y: 157
+      width: 200
+      height: 100
+  - uniqueID: 2
+    text: test
     children: []
-    position:
+    rect:
       serializedVersion: 2
-      x: 0
-      y: 200
+      x: 525
+      y: 53
       width: 200
-      height: 200
-  - UniqueID: 3
-    text: Maricon
+      height: 100
+  - uniqueID: 3
+    text: test
+    children:
+    - 0
+    - 4
+    rect:
+      serializedVersion: 2
+      x: 515
+      y: 195
+      width: 200
+      height: 100
+  - uniqueID: 4
+    text: test
     children: []
-    position:
+    rect:
       serializedVersion: 2
-      x: 0
-      y: 400
+      x: 839
+      y: 257
       width: 200
-      height: 200
-  - UniqueID: 4
-    text: Estafador
-    children: []
-    position:
-      serializedVersion: 2
-      x: 200
-      y: 0
-      width: 200
-      height: 200
-  - UniqueID: 5
-    text: Burges
-    children: []
-    position:
-      serializedVersion: 2
-      x: 200
-      y: 200
-      width: 200
-      height: 200
+      height: 100

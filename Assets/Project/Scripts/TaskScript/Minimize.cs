@@ -2,36 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Minimize : MonoBehaviour
+public class Minimize : Button
 {
-    [SerializeField]
-    private bool isMinimize = false;
-    private SpriteRenderer spriteRenderer;
-    private BoxCollider2D boxCollider2D;
-    [SerializeField]
-    private OpenApp openApp;
-
-    private void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        boxCollider2D = GetComponent<BoxCollider2D>();
-    }
+    //[SerializeField] private bool isMinimize;
+    [SerializeField] private OpenApp openApp;
+    [SerializeField] private GameObject parentObject;
 
     private void Update()
     {
-        if (isMinimize)
+        if (SimulateButton(gameObject.name))
         {
-            spriteRenderer.enabled = false;
-            boxCollider2D.enabled = false;
-        }
-        else if (!isMinimize)
-        {
-            spriteRenderer.enabled = true;
-            boxCollider2D.enabled = true;
-        }
-        
-    }
+            Debug.Log("Minimized");
+            //isMinimize = false;
+            parentObject.SetActive(false);
+            /*
+            if (isMinimize)
+            {
 
+            }
+            else if (!isMinimize)
+            {
+
+            }
+            */
+        }
+    }
+    /*
     private void OnMouseDown()
     {
         if (Input.GetMouseButtonDown(0))
@@ -43,11 +39,11 @@ public class Minimize : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
             openApp.DesactiveApp();
     }
-
-    public void SetIsMinimize()
+    
+    public void SetIsMinimize(bool value)
     {
-        isMinimize = false;
+        isMinimize = value;
     }
-
+    */
 }
 
